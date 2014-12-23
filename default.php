@@ -1,10 +1,10 @@
-<?php
+<?php  if (!defined('APPLICATION')) exit();
 $PluginInfo['KarmaBankPostTypeCategory'] = array(
     'Name' => 'KarmaBank Post Type Category',
     'Description' => 'Extends KarmaBank to set rule that cross reference different post types (Depending on Discussion Type), per category',
     'RequiredApplications' => array('Vanilla' => '2.1'),
     'RequiredPlugins' => array('KarmaBank' => '0.9.6.9b'),
-    'Version' => '0.1b',
+    'Version' => '0.1.1b',
     'Author' => "Paul Thomas",
     'AuthorEmail' => 'dt01pqt_pt@yahoo.com'
 );
