@@ -3,7 +3,7 @@ $PluginInfo['KarmaBankPostTypeCategory'] = array(
     'Name' => 'KarmaBank Post Type Category',
     'Description' => 'Extends KarmaBank to set rule that cross reference different post types (Depending on Discussion Type), per category',
     'RequiredApplications' => array('Vanilla' => '2.1'),
-    'RequiredPlugins' => array('KarmaBank' => '0.9.6.9b'),
+    'RequiredPlugins' => array('KarmaBank' => '0.9.7.0b'),
     'Version' => '0.1.1b',
     'Author' => "Paul Thomas",
     'AuthorEmail' => 'dt01pqt_pt@yahoo.com'
@@ -47,7 +47,7 @@ class KarmaBankPostTypeCategory extends Gdn_Plugin {
     
     protected function UpdateCounts($PostType, $Args){
         $UserID = GetValue('InsertUserID', $Args, GetValueR('FormPostValues.InsertUserID', $Args));
-        $DiscussionType = GetValue('Type',$Args, GetValueR('Discussion.Type', $Args));
+        $DiscussionType = GetValue('Type',$Args, GetValueR('Discussion.Type', $Args, 'Discussion'));
         $PostTerm = GetValueR("{$DiscussionType}.{$PostType}", $this->PostTypes, $this->PostTypes['Discussion']);
         $Category = CategoryModel::Categories(GetValue('CategoryID',$Args,GetValueR('Discussion.CategoryID', $Args)));
         $CategoryName = str_replace(' ', '', ucwords(str_replace('-', ' ', Getvalue('UrlCode',$Category))));
@@ -102,7 +102,7 @@ class KarmaBankPostTypeCategory extends Gdn_Plugin {
     public function Base_BeforeControllerMethod_Handler($Sender) {
         if(!Gdn::PluginManager()->GetPluginInstance('KarmaBank')->IsEnabled())
           return;
-        if(!Gdn::Session()->isValid()) return;
+        if(!Gdn::Session()->IsValid()) return;
          
     }
     
